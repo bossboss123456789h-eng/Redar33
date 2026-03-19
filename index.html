@@ -1,94 +1,149 @@
 <!DOCTYPE html><html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>💀 RIDERMAX HOST</title><style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>@ridermax707 | PRO HOST</title><style>
 body{
- margin:0;
- background:#0b0f1a;
- color:#00ffaa;
- text-align:center;
- font-family:monospace;
+    margin:0;
+    background:linear-gradient(145deg,#0a0f1a,#1a2538);
+    color:white;
+    font-family:Arial;
+    text-align:center;
 }
 
-#main{
- padding-top:120px;
+/* الهيدر */
+.logo{
+    width:90px;
+    border-radius:50%;
+    margin:15px;
+    border:3px solid #00ffaa;
+    box-shadow:0 0 15px #00ffaa;
 }
 
-button{
- padding:20px 50px;
- font-size:22px;
- border:none;
- border-radius:50px;
- background:#00ffaa;
- cursor:pointer;
+/* زر */
+.btn{
+    background:#00ffaa;
+    color:black;
+    padding:18px 50px;
+    border-radius:50px;
+    font-size:24px;
+    cursor:pointer;
+    box-shadow:0 0 20px #00ffaa;
+    margin-top:40px;
 }
 
-/* شاشة الصورة */
+/* شاشة التهكير */
 #overlay{
- display:none;
- position:fixed;
- top:0;
- left:0;
- width:100%;
- height:100%;
- background:black;
- z-index:9999;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:black;
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
 }
 
-#overlay img{
- width:100%;
- height:100%;
- object-fit:cover;
+#status{
+    font-size:35px;
+    color:#00ffaa;
 }
-</style></head><body><div id="main">
+
+/* البار */
+#progress{
+    width:80%;
+    height:10px;
+    background:#222;
+    border-radius:20px;
+    margin-top:20px;
+}
+
+#bar{
+    height:100%;
+    width:0%;
+    background:#00ffaa;
+}
+
+/* logs */
+#logs{
+    width:80%;
+    background:#000;
+    margin-top:20px;
+    padding:10px;
+    height:120px;
+    overflow:auto;
+    font-family:monospace;
+    font-size:14px;
+    text-align:left;
+}
+</style></head><body><img src="https://i.postimg.cc/Z5ct06Lm/Screenshot-20260315-194604.jpg" class="logo">
 <h1>@ridermax707</h1>
-<h2>🔥 AUTO EXPLOIT + GOLDHEN</h2>
-<button onclick="start()">💀 هكرني ابن بنية</button>
-</div><div id="overlay">
-<img src="https://i.postimg.cc/h4zBMzKT/Screenshot-20260315-194622.jpg">
-</div><script>
-function start(){
+<img src="https://i.postimg.cc/h4zBMzKT/Screenshot-20260315-194622.jpg" class="logo"><h2>🔥 اضغط لتشغيل التهكير</h2>
+<div class="btn" onclick="startHack()">تشغيل الآن</div><!-- شاشة --><div id="overlay">
+    <div id="status">جارِ التفعيل...</div><div id="progress">
+    <div id="bar"></div>
+</div>
 
- // إظهار الصورة
- document.getElementById("overlay").style.display="block";
+<div id="logs"></div>
 
- // فتح exploit بمربع مخفي
- let win = window.open(
-  "https://4psf.gt.tc/version-selector.html?i=1",
-  "_blank",
-  "width=300,height=300"
- );
+</div><audio id="sound" src="https://www.myinstants.com/media/sounds/horror-scream.mp3"></audio>
 
- if(win){
-  win.blur();
-  window.focus();
- }
+<script>
 
- // بعد 6 ثواني نحاول تشغيل GoldHEN
- setTimeout(runHen,6000);
+function log(t){
+    let l=document.getElementById("logs");
+    l.innerHTML+="[+] "+t+"<br>";
+    l.scrollTop=l.scrollHeight;
 }
 
-function runHen(){
-
- let ws=new WebSocket("ws://127.0.0.1:9020");
- ws.binaryType="arraybuffer";
-
- ws.onopen=()=>{
-  fetch("https://files.catbox.moe/6e7po9.bin")
-  .then(r=>r.arrayBuffer())
-  .then(buf=>{
-    ws.send(buf);
-
-    // إخفاء الصورة بعد النجاح
-    setTimeout(()=>{
-      document.getElementById("overlay").style.display="none";
-    },2000);
-  });
- };
-
- ws.onerror=()=>{
-  alert("❌ تأكد إن exploit اشتغل");
- };
+function vibrate(){
+    if(navigator.vibrate){
+        navigator.vibrate([300,100,300]);
+    }
 }
+
+function startHack(){
+
+    document.getElementById("overlay").style.display="flex";
+    document.getElementById("sound").play();
+    vibrate();
+
+    let bar=document.getElementById("bar");
+    let status=document.getElementById("status");
+
+    let p=0;
+
+    let i=setInterval(()=>{
+
+        p+=4;
+        bar.style.width=p+"%";
+
+        if(p==10){log("Initializing WebKit...");}
+        if(p==30){status.innerText="تحميل exploit...";}
+        if(p==50){log("Triggering vulnerability...");}
+        if(p==70){status.innerText="تشغيل Kernel...";}
+        if(p==90){log("Loading GoldHEN...");}
+
+        if(p>=100){
+            clearInterval(i);
+            status.innerText="نجاح ✔";
+
+            // 🔥 التحويل للموقع القوي
+            setTimeout(()=>{
+                window.location.href="https://karo218.ir/900";
+            },1500);
+
+            // 💀 fallback إذا فشل
+            setTimeout(()=>{
+                window.location.href="https://nightkinghost.com";
+            },8000);
+        }
+
+    },120);
+}
+
 </script></body>
 </html>
