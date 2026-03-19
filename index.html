@@ -2,167 +2,167 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>@ridermax707 - PS4 Exploit</title><style>
-body {
-    background: linear-gradient(145deg, #0a0f1a, #1a2538);
-    color: white;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 20px;
-    direction: rtl;
+<title>@ridermax707 | PRO HOST</title><style>
+body{
+margin:0;
+background:linear-gradient(145deg,#0a0f1a,#1a2538);
+color:white;
+font-family:Arial;
+text-align:center;
+direction:rtl;
 }
-.penguin-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    margin: 30px 0;
-    background: rgba(0,0,0,0.6);
-    padding: 20px;
-    border-radius: 60px;
-    border: 3px solid #00ffaa;
-    box-shadow: 0 0 40px #00ffaa;
-}
-.penguin-img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    border: 3px solid #00ffaa;
-}
-h1 {
-    font-size: 3rem;
-    color: #00ffaa;
-    text-shadow: 0 0 20px #00ffaa;
-}
-.version-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    margin: 40px 0;
-}
-.version-card {
-    background: #1a2638;
-    border: 2px solid #00aaff;
-    border-radius: 40px;
-    padding: 25px;
-    width: 200px;
-    cursor: pointer;
-    transition: 0.2s;
-}
-.version-card:hover {
-    border-color: #00ffaa;
-    transform: scale(1.05);
-}
-.version-card h2 {
-    color: #00aaff;
-    font-size: 2.5rem;
-    margin: 10px 0;
-}
-.exploit-btn {
-    background: #00ffaa;
-    color: black;
-    border: none;
-    border-radius: 60px;
-    padding: 20px 50px;
-    font-size: 2rem;
-    font-weight: bold;
-    margin: 30px auto;
-    display: block;
-    box-shadow: 0 0 30px #00ffaa;
-}
-.log-panel {
-    background: #0a101a;
-    border-radius: 30px;
-    padding: 20px;
-    max-height: 200px;
-    overflow-y: auto;
-    margin: 30px 0;
-    text-align: left;
-    direction: ltr;
-    font-family: monospace;
-}
-.footer {
-    color: #556677;
-    margin-top: 30px;
-}
-</style></head><body><div class="penguin-container">
-    <img src="https://i.postimg.cc/Z5ct06Lm/Screenshot-20260315-194604.jpg" class="penguin-img">
-    <h1>@ridermax707</h1>
-    <img src="https://i.postimg.cc/h4zBMzKT/Screenshot-20260315-194622.jpg" class="penguin-img">
-</div><h2>اختر إصدار جهازك</h2><div class="version-grid">
-    <div class="version-card" data-version="9.00">
-        <h2>9.00</h2>
-        <p>مدعوم بالكامل</p>
-    </div><div class="version-card" data-version="11.00">
-    <h2>11.00</h2>
-    <p>تجريبي</p>
-</div>
 
-<div class="version-card" data-version="5.05">
-    <h2>5.05</h2>
-    <p>قديم</p>
-</div>
+h1{
+color:#00ffaa;
+font-size:2.5rem;
+text-shadow:0 0 20px #00ffaa;
+margin-top:20px;
+}
 
-</div><button class="exploit-btn" id="startBtn">🔥 ابدأ التهكير</button>
+.version{
+display:flex;
+justify-content:center;
+gap:15px;
+margin:30px;
+flex-wrap:wrap;
+}
 
-<div class="log-panel" id="logPanel">
-    <div>➡️ اختر الإصدار ثم اضغط الزر</div>
-</div><div class="footer">
-    <p>© 2026 @ridermax707</p>
+.card{
+background:#1a2638;
+padding:20px;
+border-radius:30px;
+border:2px solid #00aaff;
+width:120px;
+cursor:pointer;
+}
+
+.card.active{
+border-color:#00ffaa;
+box-shadow:0 0 20px #00ffaa;
+}
+
+.btn{
+background:#00ffaa;
+padding:20px;
+border-radius:50px;
+font-size:1.5rem;
+margin-top:20px;
+cursor:pointer;
+}
+
+#overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+display:none;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+#status{
+font-size:25px;
+color:#00ffaa;
+margin-bottom:20px;
+}
+
+#bar{
+width:0%;
+height:10px;
+background:#00ffaa;
+transition:0.3s;
+}
+
+#progress{
+width:80%;
+background:#222;
+}
+
+#log{
+width:80%;
+height:120px;
+background:#000;
+margin-top:20px;
+overflow:auto;
+font-family:monospace;
+font-size:13px;
+padding:10px;
+text-align:left;
+direction:ltr;
+}
+</style></head><body><h1>@ridermax707</h1><div class="version">
+<div class="card active" data-v="9.00">9.00</div>
+<div class="card" data-v="11.00">11.00</div>
+<div class="card" data-v="5.05">5.05</div>
+</div><div class="btn" onclick="start()">💀 ابدأ التفعيل</div><div id="overlay">
+<div id="status">جارِ الفحص...</div><div id="progress">
+<div id="bar"></div>
+</div><div id="log"></div>
 </div><script>
 
-const logPanel = document.getElementById('logPanel');
-const startBtn = document.getElementById('startBtn');
-const versionCards = document.querySelectorAll('.version-card');
+let selected = "9.00";
 
-let selectedVersion = '9.00';
-
-// تسجيل log
-function addLog(msg) {
-    const entry = document.createElement('div');
-    entry.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
-    logPanel.appendChild(entry);
-    logPanel.scrollTop = logPanel.scrollHeight;
+document.querySelectorAll(".card").forEach(c=>{
+c.onclick=()=>{
+document.querySelectorAll(".card").forEach(x=>x.classList.remove("active"));
+c.classList.add("active");
+selected=c.dataset.v;
+log("تم اختيار "+selected);
 }
-
-// اختيار النسخة
-versionCards.forEach(card => {
-    card.addEventListener('click', () => {
-        versionCards.forEach(c => c.style.borderColor = '#00aaff');
-        card.style.borderColor = '#00ffaa';
-        selectedVersion = card.dataset.version;
-        addLog(`✅ تم اختيار الإصدار ${selectedVersion}`);
-    });
 });
 
-// زر التهكير
-startBtn.addEventListener('click', () => {
-
-    addLog(`🚀 تحويل إلى موقع التفعيل...`);
-
-    localStorage.setItem("hack_started", "yes");
-
-    window.location.href = "https://bex19.github.io/313/";
-
-});
-
-// عند الرجوع
-window.onload = function(){
-
-    if(localStorage.getItem("hack_started") === "yes"){
-
-        addLog("🎉 تم ابن بنيه الغالي 😎");
-        addLog("🔥 GoldHEN مفعل بنجاح");
-
-        localStorage.removeItem("hack_started");
-
-        document.body.style.boxShadow = "0 0 100px #00ffaa inset";
-    }
+function log(t){
+let l=document.getElementById("log");
+l.innerHTML+="[+] "+t+"<br>";
+l.scrollTop=l.scrollHeight;
 }
 
-// الافتراضي
-versionCards[0].style.borderColor = '#00ffaa';
+function start(){
+
+let o=document.getElementById("overlay");
+let bar=document.getElementById("bar");
+let status=document.getElementById("status");
+
+o.style.display="flex";
+
+let p=0;
+
+let i=setInterval(()=>{
+
+p+=2;
+bar.style.width=p+"%";
+
+if(p==10) log("Checking system...");
+if(p==20) status.innerText="Loading WebKit...";
+if(p==40) log("WebKit Loaded");
+if(p==50 && selected=="9.00"){
+status.innerText="Running Kernel Exploit...";
+log("Lapse Triggered");
+}
+if(p==70){
+status.innerText="Injecting Payload...";
+log("GoldHEN loading...");
+}
+if(p==90){
+log("Finishing...");
+}
+
+if(p>=100){
+clearInterval(i);
+
+status.innerText="تم بنجاح 🎉";
+log("GoldHEN Active");
+
+document.body.style.boxShadow="0 0 120px #00ffaa inset";
+}
+
+},100);
+
+}
 
 </script></body>
 </html>
