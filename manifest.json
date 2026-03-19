@@ -1,0 +1,8 @@
+{
+"name": "Rider Host",
+"short_name": "Rider",
+"start_url": "index.html",
+"display": "standalone",
+"background_color": "#000000",
+"theme_color": "#00ffaa"
+}
