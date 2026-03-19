@@ -4,27 +4,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>@ridermax707 | PRO HOST</title><style>
 body{
-margin:0;
 background:linear-gradient(145deg,#0a0f1a,#1a2538);
 color:white;
 font-family:Arial;
 text-align:center;
 direction:rtl;
+margin:0;
+padding:20px;
 }
 
 h1{
 color:#00ffaa;
-font-size:2.5rem;
 text-shadow:0 0 20px #00ffaa;
-margin-top:20px;
 }
 
-.version{
+.version-grid{
 display:flex;
 justify-content:center;
 gap:15px;
-margin:30px;
 flex-wrap:wrap;
+margin:30px 0;
 }
 
 .card{
@@ -32,7 +31,6 @@ background:#1a2638;
 padding:20px;
 border-radius:30px;
 border:2px solid #00aaff;
-width:120px;
 cursor:pointer;
 }
 
@@ -46,65 +44,47 @@ background:#00ffaa;
 padding:20px;
 border-radius:50px;
 font-size:1.5rem;
-margin-top:20px;
 cursor:pointer;
+margin-top:20px;
 }
 
-#overlay{
+.log{
+background:#000;
+margin-top:20px;
+padding:10px;
+height:120px;
+overflow:auto;
+font-family:monospace;
+text-align:left;
+direction:ltr;
+}
+
+/* iframe من الأسفل */
+#exploitFrame{
 position:fixed;
-top:0;
+bottom:-100%;
 left:0;
 width:100%;
 height:100%;
 background:black;
-display:none;
-flex-direction:column;
-justify-content:center;
-align-items:center;
+transition:0.6s;
 z-index:9999;
 }
 
-#status{
-font-size:25px;
-color:#00ffaa;
-margin-bottom:20px;
+#exploitFrame iframe{
+width:100%;
+height:100%;
+border:none;
 }
-
-#bar{
-width:0%;
-height:10px;
-background:#00ffaa;
-transition:0.3s;
-}
-
-#progress{
-width:80%;
-background:#222;
-}
-
-#log{
-width:80%;
-height:120px;
-background:#000;
-margin-top:20px;
-overflow:auto;
-font-family:monospace;
-font-size:13px;
-padding:10px;
-text-align:left;
-direction:ltr;
-}
-</style></head><body><h1>@ridermax707</h1><div class="version">
+</style></head><body><h1>@ridermax707 💀</h1><div class="version-grid">
 <div class="card active" data-v="9.00">9.00</div>
 <div class="card" data-v="11.00">11.00</div>
 <div class="card" data-v="5.05">5.05</div>
-</div><div class="btn" onclick="start()">💀 ابدأ التفعيل</div><div id="overlay">
-<div id="status">جارِ الفحص...</div><div id="progress">
-<div id="bar"></div>
-</div><div id="log"></div>
+</div><div class="btn" onclick="start()">💉 ابدأ الحقن</div><div class="btn" style="background:#ffaa00" onclick="downloadGoldhen()">📦 تحميل GoldHEN</div><div class="log" id="log"></div><!-- iframe --><div id="exploitFrame">
+<iframe id="frame"></iframe>
 </div><script>
 
-let selected = "9.00";
+let selected="9.00";
 
 document.querySelectorAll(".card").forEach(c=>{
 c.onclick=()=>{
@@ -123,44 +103,47 @@ l.scrollTop=l.scrollHeight;
 
 function start(){
 
-let o=document.getElementById("overlay");
-let bar=document.getElementById("bar");
-let status=document.getElementById("status");
+log("🚀 فتح الهوست الحقيقي...");
 
-o.style.display="flex";
+let frameBox=document.getElementById("exploitFrame");
+let iframe=document.getElementById("frame");
 
-let p=0;
+iframe.src="https://bex19.github.io/313/?i=1";
 
-let i=setInterval(()=>{
+frameBox.style.bottom="0";
 
-p+=2;
-bar.style.width=p+"%";
+// كشف التفاعل
+let check=setInterval(()=>{
 
-if(p==10) log("Checking system...");
-if(p==20) status.innerText="Loading WebKit...";
-if(p==40) log("WebKit Loaded");
-if(p==50 && selected=="9.00"){
-status.innerText="Running Kernel Exploit...";
-log("Lapse Triggered");
-}
-if(p==70){
-status.innerText="Injecting Payload...";
-log("GoldHEN loading...");
-}
-if(p==90){
-log("Finishing...");
+if(document.activeElement===iframe){
+
+log("📡 تم التفاعل...");
+
+setTimeout(()=>{
+closeExploit();
+},6000);
+
+clearInterval(check);
 }
 
-if(p>=100){
-clearInterval(i);
+},1000);
 
-status.innerText="تم بنجاح 🎉";
-log("GoldHEN Active");
-
-document.body.style.boxShadow="0 0 120px #00ffaa inset";
 }
 
-},100);
+function closeExploit(){
+
+document.getElementById("exploitFrame").style.bottom="-100%";
+
+log("🎉 تم ابن بنيه الغالي 😎");
+log("🔥 GoldHEN مفعل بنجاح");
+
+}
+
+function downloadGoldhen(){
+
+log("📦 فتح صفحة GoldHEN...");
+
+window.open("https://github.com/GoldHEN/GoldHEN/releases/latest","_blank");
 
 }
 
