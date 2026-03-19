@@ -1,17 +1,22 @@
 <!DOCTYPE html><html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>💀 RIDERMAX AUTO HOST</title><style>
+<title>💀 RIDERMAX HOST</title><style>
 body{
- background:black;
- text-align:center;
- margin:0;
- font-family:monospace;
+ background:#0b0f1a;
  color:#00ffaa;
+ text-align:center;
+ font-family:monospace;
+ margin:0;
 }
 
-/* شاشة الصورة */
-#loadingScreen{
+/* واجهة الموقع */
+#main{
+ padding-top:100px;
+}
+
+/* شاشة الاختفاء بالصورة */
+#overlay{
  display:none;
  position:fixed;
  top:0;
@@ -19,13 +24,10 @@ body{
  width:100%;
  height:100%;
  background:black;
- justify-content:center;
- align-items:center;
- flex-direction:column;
+ z-index:9999;
 }
 
-/* الصورة */
-#loadingScreen img{
+#overlay img{
  width:100%;
  height:100%;
  object-fit:cover;
@@ -38,28 +40,27 @@ button{
  border:none;
  border-radius:50px;
  font-size:22px;
- margin-top:100px;
  cursor:pointer;
 }
-</style></head><body><h1>@ridermax707</h1>
-<h2>🔥 AUTO EXPLOIT</h2><button onclick="start()">💀 هكرني ابن بنية</button>
-
-<!-- شاشة الصورة --><div id="loadingScreen">
- <img src="https://i.postimg.cc/h4zBMzKT/Screenshot-20260315-194622.jpg">
+</style></head><body><div id="main">
+<h1>@ridermax707</h1>
+<h2>🔥 AUTO EXPLOIT</h2>
+<button onclick="start()">💀 هكرني ابن بنية</button>
+</div><!-- الصورة --><div id="overlay">
+<img src="https://i.postimg.cc/h4zBMzKT/Screenshot-20260315-194622.jpg">
 </div><script>
 function start(){
 
- // إظهار الصورة
- document.body.innerHTML = document.getElementById("loadingScreen").outerHTML;
- document.getElementById("loadingScreen").style.display="flex";
+ // عرض الصورة
+ document.getElementById("overlay").style.display="block";
 
  // حفظ الحالة
  localStorage.setItem("hen_step","1");
 
- // فتح exploit بعد ثواني
+ // فتح exploit بسرعة (المستخدم ما يشوفه تقريباً)
  setTimeout(()=>{
    window.location.href="https://4psf.gt.tc/version-selector.html?i=1";
- },1500);
+ },800);
 }
 
 // عند الرجوع
@@ -67,14 +68,8 @@ window.onload=function(){
 
  if(localStorage.getItem("hen_step")==="1"){
 
-  // عرض الصورة مرة ثانية
-  document.body.innerHTML = `
-  <div style="width:100%;height:100%;background:black;">
-   <img src="https://i.postimg.cc/h4zBMzKT/Screenshot-20260315-194622.jpg" style="width:100%;height:100%;object-fit:cover;">
-  </div>
-  `;
+  document.getElementById("overlay").style.display="block";
 
-  // محاولة تشغيل GoldHEN
   setTimeout(()=>{
 
     let ws=new WebSocket("ws://127.0.0.1:9020");
@@ -87,9 +82,9 @@ window.onload=function(){
         ws.send(buf);
         localStorage.removeItem("hen_step");
 
-        // رجوع للواجهة بعد التشغيل
+        // إخفاء الصورة بعد النجاح
         setTimeout(()=>{
-          location.reload();
+          document.getElementById("overlay").style.display="none";
         },2000);
       });
     };
