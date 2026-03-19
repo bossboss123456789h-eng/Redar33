@@ -2,138 +2,167 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>@ridermax707 | OFFLINE HOST</title><link rel="manifest" href="manifest.json"><style>
-body{
-margin:0;
-background:linear-gradient(145deg,#0a0f1a,#1a2538);
-color:white;
-font-family:Arial;
-text-align:center;
+<title>@ridermax707 - PS4 Exploit</title><style>
+body {
+    background: linear-gradient(145deg, #0a0f1a, #1a2538);
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    direction: rtl;
 }
+.penguin-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 30px 0;
+    background: rgba(0,0,0,0.6);
+    padding: 20px;
+    border-radius: 60px;
+    border: 3px solid #00ffaa;
+    box-shadow: 0 0 40px #00ffaa;
+}
+.penguin-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid #00ffaa;
+}
+h1 {
+    font-size: 3rem;
+    color: #00ffaa;
+    text-shadow: 0 0 20px #00ffaa;
+}
+.version-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin: 40px 0;
+}
+.version-card {
+    background: #1a2638;
+    border: 2px solid #00aaff;
+    border-radius: 40px;
+    padding: 25px;
+    width: 200px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.version-card:hover {
+    border-color: #00ffaa;
+    transform: scale(1.05);
+}
+.version-card h2 {
+    color: #00aaff;
+    font-size: 2.5rem;
+    margin: 10px 0;
+}
+.exploit-btn {
+    background: #00ffaa;
+    color: black;
+    border: none;
+    border-radius: 60px;
+    padding: 20px 50px;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 30px auto;
+    display: block;
+    box-shadow: 0 0 30px #00ffaa;
+}
+.log-panel {
+    background: #0a101a;
+    border-radius: 30px;
+    padding: 20px;
+    max-height: 200px;
+    overflow-y: auto;
+    margin: 30px 0;
+    text-align: left;
+    direction: ltr;
+    font-family: monospace;
+}
+.footer {
+    color: #556677;
+    margin-top: 30px;
+}
+</style></head><body><div class="penguin-container">
+    <img src="https://i.postimg.cc/Z5ct06Lm/Screenshot-20260315-194604.jpg" class="penguin-img">
+    <h1>@ridermax707</h1>
+    <img src="https://i.postimg.cc/h4zBMzKT/Screenshot-20260315-194622.jpg" class="penguin-img">
+</div><h2>اختر إصدار جهازك</h2><div class="version-grid">
+    <div class="version-card" data-version="9.00">
+        <h2>9.00</h2>
+        <p>مدعوم بالكامل</p>
+    </div><div class="version-card" data-version="11.00">
+    <h2>11.00</h2>
+    <p>تجريبي</p>
+</div>
 
-.logo{
-width:90px;
-border-radius:50%;
-margin:15px;
-border:3px solid #00ffaa;
-}
+<div class="version-card" data-version="5.05">
+    <h2>5.05</h2>
+    <p>قديم</p>
+</div>
 
-.btn{
-background:#00ffaa;
-color:black;
-padding:20px;
-border-radius:40px;
-font-size:1.6rem;
-cursor:pointer;
-margin-top:30px;
-box-shadow:0 0 20px #00ffaa;
-}
+</div><button class="exploit-btn" id="startBtn">🔥 ابدأ التهكير</button>
 
-#overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:black;
-display:none;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-z-index:9999;
-}
-
-#status{
-color:#00ffaa;
-font-size:28px;
-}
-
-#progress{
-width:80%;
-height:10px;
-background:#222;
-margin-top:20px;
-border-radius:20px;
-}
-
-#bar{
-height:100%;
-width:0%;
-background:#00ffaa;
-}
-
-#logs{
-width:80%;
-background:#000;
-margin-top:20px;
-padding:10px;
-height:120px;
-overflow:auto;
-font-family:monospace;
-font-size:14px;
-text-align:left;
-}
-</style></head><body><img src="https://i.postimg.cc/Z5ct06Lm/Screenshot-20260315-194604.jpg" class="logo">
-<h1>@ridermax707</h1><div class="btn" onclick="startHack()">💀 هكرني ابن بنيه</div><div id="overlay">
-<div id="status">جارِ التفعيل...</div><div id="progress">
-<div id="bar"></div>
-</div><div id="logs"></div>
+<div class="log-panel" id="logPanel">
+    <div>➡️ اختر الإصدار ثم اضغط الزر</div>
+</div><div class="footer">
+    <p>© 2026 @ridermax707</p>
 </div><script>
 
-// تسجيل logs
-function log(t){
-let l=document.getElementById("logs");
-l.innerHTML+="[+] "+t+"<br>";
-l.scrollTop=l.scrollHeight;
+const logPanel = document.getElementById('logPanel');
+const startBtn = document.getElementById('startBtn');
+const versionCards = document.querySelectorAll('.version-card');
+
+let selectedVersion = '9.00';
+
+// تسجيل log
+function addLog(msg) {
+    const entry = document.createElement('div');
+    entry.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+    logPanel.appendChild(entry);
+    logPanel.scrollTop = logPanel.scrollHeight;
 }
 
-// تشغيل
-function startHack(){
+// اختيار النسخة
+versionCards.forEach(card => {
+    card.addEventListener('click', () => {
+        versionCards.forEach(c => c.style.borderColor = '#00aaff');
+        card.style.borderColor = '#00ffaa';
+        selectedVersion = card.dataset.version;
+        addLog(`✅ تم اختيار الإصدار ${selectedVersion}`);
+    });
+});
 
-document.getElementById("overlay").style.display="flex";
+// زر التهكير
+startBtn.addEventListener('click', () => {
 
-let bar=document.getElementById("bar");
-let status=document.getElementById("status");
+    addLog(`🚀 تحويل إلى موقع التفعيل...`);
 
-let p=0;
+    localStorage.setItem("hack_started", "yes");
 
-let i=setInterval(()=>{
+    window.location.href = "https://bex19.github.io/313/";
 
-p+=3;
-bar.style.width=p+"%";
+});
 
-if(p==10){log("Checking system...");}
-if(p==30){status.innerText="تحميل exploit...";}
-if(p==50){log("Trying Karo Host...");}
-if(p==70){status.innerText="تشغيل Kernel...";}
-if(p==90){log("Fallback ready...");}
+// عند الرجوع
+window.onload = function(){
 
-if(p>=100){
-clearInterval(i);
-status.innerText="جاري التشغيل...";
+    if(localStorage.getItem("hack_started") === "yes"){
 
-// Karo
-window.location.href="https://karo218.ir/900";
+        addLog("🎉 تم ابن بنيه الغالي 😎");
+        addLog("🔥 GoldHEN مفعل بنجاح");
 
-// fallback
-setTimeout(()=>{
-window.location.href="https://nightkinghost.com";
-},7000);
+        localStorage.removeItem("hack_started");
 
-// fallback 2
-setTimeout(()=>{
-window.location.href="https://leeful.github.io";
-},14000);
-
+        document.body.style.boxShadow = "0 0 100px #00ffaa inset";
+    }
 }
 
-},120);
-}
-
-// تسجيل Service Worker
-if ('serviceWorker' in navigator) {
-navigator.serviceWorker.register('sw.js');
-}
+// الافتراضي
+versionCards[0].style.borderColor = '#00ffaa';
 
 </script></body>
 </html>
