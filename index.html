@@ -2,147 +2,137 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>@ridermax707 | PRO HOST</title><style>
+<title>@ridermax707 | OFFLINE HOST</title><link rel="manifest" href="manifest.json"><style>
 body{
-    margin:0;
-    background:linear-gradient(145deg,#0a0f1a,#1a2538);
-    color:white;
-    font-family:Arial;
-    text-align:center;
+margin:0;
+background:linear-gradient(145deg,#0a0f1a,#1a2538);
+color:white;
+font-family:Arial;
+text-align:center;
 }
 
-/* الهيدر */
 .logo{
-    width:90px;
-    border-radius:50%;
-    margin:15px;
-    border:3px solid #00ffaa;
-    box-shadow:0 0 15px #00ffaa;
+width:90px;
+border-radius:50%;
+margin:15px;
+border:3px solid #00ffaa;
 }
 
-/* زر */
 .btn{
-    background:#00ffaa;
-    color:black;
-    padding:18px 50px;
-    border-radius:50px;
-    font-size:24px;
-    cursor:pointer;
-    box-shadow:0 0 20px #00ffaa;
-    margin-top:40px;
+background:#00ffaa;
+color:black;
+padding:20px;
+border-radius:40px;
+font-size:1.6rem;
+cursor:pointer;
+margin-top:30px;
+box-shadow:0 0 20px #00ffaa;
 }
 
-/* شاشة التهكير */
 #overlay{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:black;
-    display:none;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+display:none;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:9999;
 }
 
 #status{
-    font-size:35px;
-    color:#00ffaa;
+color:#00ffaa;
+font-size:28px;
 }
 
-/* البار */
 #progress{
-    width:80%;
-    height:10px;
-    background:#222;
-    border-radius:20px;
-    margin-top:20px;
+width:80%;
+height:10px;
+background:#222;
+margin-top:20px;
+border-radius:20px;
 }
 
 #bar{
-    height:100%;
-    width:0%;
-    background:#00ffaa;
+height:100%;
+width:0%;
+background:#00ffaa;
 }
 
-/* logs */
 #logs{
-    width:80%;
-    background:#000;
-    margin-top:20px;
-    padding:10px;
-    height:120px;
-    overflow:auto;
-    font-family:monospace;
-    font-size:14px;
-    text-align:left;
+width:80%;
+background:#000;
+margin-top:20px;
+padding:10px;
+height:120px;
+overflow:auto;
+font-family:monospace;
+font-size:14px;
+text-align:left;
 }
 </style></head><body><img src="https://i.postimg.cc/Z5ct06Lm/Screenshot-20260315-194604.jpg" class="logo">
-<h1>@ridermax707</h1>
-<img src="https://i.postimg.cc/h4zBMzKT/Screenshot-20260315-194622.jpg" class="logo"><h2>🔥 اضغط لتشغيل التهكير</h2>
-<div class="btn" onclick="startHack()">تشغيل الآن</div><!-- شاشة --><div id="overlay">
-    <div id="status">جارِ التفعيل...</div><div id="progress">
-    <div id="bar"></div>
-</div>
+<h1>@ridermax707</h1><div class="btn" onclick="startHack()">💀 هكرني ابن بنيه</div><div id="overlay">
+<div id="status">جارِ التفعيل...</div><div id="progress">
+<div id="bar"></div>
+</div><div id="logs"></div>
+</div><script>
 
-<div id="logs"></div>
-
-</div><audio id="sound" src="https://www.myinstants.com/media/sounds/horror-scream.mp3"></audio>
-
-<script>
-
+// تسجيل logs
 function log(t){
-    let l=document.getElementById("logs");
-    l.innerHTML+="[+] "+t+"<br>";
-    l.scrollTop=l.scrollHeight;
+let l=document.getElementById("logs");
+l.innerHTML+="[+] "+t+"<br>";
+l.scrollTop=l.scrollHeight;
 }
 
-function vibrate(){
-    if(navigator.vibrate){
-        navigator.vibrate([300,100,300]);
-    }
-}
-
+// تشغيل
 function startHack(){
 
-    document.getElementById("overlay").style.display="flex";
-    document.getElementById("sound").play();
-    vibrate();
+document.getElementById("overlay").style.display="flex";
 
-    let bar=document.getElementById("bar");
-    let status=document.getElementById("status");
+let bar=document.getElementById("bar");
+let status=document.getElementById("status");
 
-    let p=0;
+let p=0;
 
-    let i=setInterval(()=>{
+let i=setInterval(()=>{
 
-        p+=4;
-        bar.style.width=p+"%";
+p+=3;
+bar.style.width=p+"%";
 
-        if(p==10){log("Initializing WebKit...");}
-        if(p==30){status.innerText="تحميل exploit...";}
-        if(p==50){log("Triggering vulnerability...");}
-        if(p==70){status.innerText="تشغيل Kernel...";}
-        if(p==90){log("Loading GoldHEN...");}
+if(p==10){log("Checking system...");}
+if(p==30){status.innerText="تحميل exploit...";}
+if(p==50){log("Trying Karo Host...");}
+if(p==70){status.innerText="تشغيل Kernel...";}
+if(p==90){log("Fallback ready...");}
 
-        if(p>=100){
-            clearInterval(i);
-            status.innerText="نجاح ✔";
+if(p>=100){
+clearInterval(i);
+status.innerText="جاري التشغيل...";
 
-            // 🔥 التحويل للموقع القوي
-            setTimeout(()=>{
-                window.location.href="https://karo218.ir/900";
-            },1500);
+// Karo
+window.location.href="https://karo218.ir/900";
 
-            // 💀 fallback إذا فشل
-            setTimeout(()=>{
-                window.location.href="https://nightkinghost.com";
-            },8000);
-        }
+// fallback
+setTimeout(()=>{
+window.location.href="https://nightkinghost.com";
+},7000);
 
-    },120);
+// fallback 2
+setTimeout(()=>{
+window.location.href="https://leeful.github.io";
+},14000);
+
+}
+
+},120);
+}
+
+// تسجيل Service Worker
+if ('serviceWorker' in navigator) {
+navigator.serviceWorker.register('sw.js');
 }
 
 </script></body>
