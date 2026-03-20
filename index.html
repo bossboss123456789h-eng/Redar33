@@ -22,7 +22,7 @@
             overflow-x: hidden;
         }
 
-        /* قماش الجزيئات */
+        /* قماش الجزيئات (particles) */
         #particle-canvas {
             position: fixed;
             top: 0;
@@ -206,7 +206,7 @@
             border: none;
         }
 
-        /* خط مسح ضوئي متحرك */
+        /* شريط التقدم السفلي (تأثير إضافي) */
         .scan-line {
             position: fixed;
             top: 0;
@@ -227,10 +227,10 @@
     </style>
 </head>
 <body>
-    <!-- قماش الجزيئات -->
+    <!-- قماش الجزيئات (particles) -->
     <canvas id="particle-canvas"></canvas>
 
-    <!-- خط المسح الضوئي -->
+    <!-- خط مسح ضوئي متحرك -->
     <div class="scan-line"></div>
 
     <div class="container">
@@ -263,7 +263,7 @@
     </div>
 
     <script>
-        // ========== جزيئات الخلفية ==========
+        // ========== جزيئات الخلفية (Particles) ==========
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let width, height;
@@ -292,7 +292,7 @@
         function drawParticles() {
             ctx.clearRect(0, 0, width, height);
             
-            // وصلات بين الجزيئات
+            // رسم وصلات بين الجزيئات القريبة
             ctx.strokeStyle = '#00aaff20';
             ctx.lineWidth = 0.5;
             for (let i = 0; i < particles.length; i++) {
@@ -319,9 +319,11 @@
                 ctx.shadowBlur = 10;
                 ctx.fill();
                 
+                // تحديث المواقع
                 p.x += p.vx;
                 p.y += p.vy;
 
+                // إعادة التدوير عند الخروج من الحافة
                 if (p.x < 0) p.x = width;
                 if (p.x > width) p.x = 0;
                 if (p.y < 0) p.y = height;
@@ -331,7 +333,10 @@
             requestAnimationFrame(drawParticles);
         }
 
-        window.addEventListener('resize', initParticles);
+        window.addEventListener('resize', () => {
+            initParticles();
+        });
+
         initParticles();
         drawParticles();
 
