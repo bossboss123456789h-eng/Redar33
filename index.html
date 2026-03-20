@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ridermax077 | PRO HOST (نسخة راقية)</title>
+    <title>@ridermax077 | PRO HOST (PS4 Edition)</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -12,8 +14,8 @@
         }
 
         body {
-            background: linear-gradient(135deg, #0b1120 0%, #1a2639 100%);
-            color: #e0e0e0;
+            background: radial-gradient(circle at 20% 30%, #1a2a3a, #0b121c);
+            color: #e9f1f7;
             text-align: center;
             direction: rtl;
             min-height: 100vh;
@@ -21,149 +23,225 @@
             flex-direction: column;
             align-items: center;
             padding: 20px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
             position: relative;
         }
 
-        /* خلفية ناعمة مع نص هكر خفيف */
-        .hacker-bg {
+        /* خلفية نجوم متحركة خفيفة */
+        .stars {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 0;
-            opacity: 0.03;
-            font-family: 'Courier New', monospace;
-            color: #4aa3ff;
-            font-size: 14px;
-            line-height: 1.4;
-            white-space: pre;
-            overflow: hidden;
-            user-select: none;
+            background: transparent;
+            z-index: -1;
         }
 
-        /* رأس الصفحة بتصميم راقي */
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            width: 2px;
+            height: 2px;
+            opacity: 0.5;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            50% { opacity: 1; }
+            100% { opacity: 0.2; }
+        }
+
+        /* رأس الصفحة - تصميم زجاجي مع إضاءة */
         .header {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px;
+            gap: 30px;
             flex-wrap: wrap;
             margin-bottom: 30px;
-            background: rgba(18, 25, 40, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 20px 40px;
-            border-radius: 60px;
-            border: 1px solid rgba(0, 255, 170, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 255, 170, 0.2);
-            z-index: 1;
+            background: rgba(20, 30, 45, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 20px 50px;
+            border-radius: 80px;
+            border: 1px solid rgba(0, 255, 170, 0.25);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 255, 200, 0.3);
+            z-index: 2;
+        }
+
+        /* صورة البطريق داخل إطار يشبه شاشة PS4 */
+        .penguin-frame {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            background: linear-gradient(145deg, #2a3a55, #1a2639);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.8), inset 0 -3px 8px rgba(0,255,170,0.3), inset 0 3px 8px rgba(255,255,255,0.1);
+            border: 2px solid #3a4a66;
         }
 
         .penguin {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            border: 2px solid rgba(0, 255, 170, 0.8);
-            box-shadow: 0 0 15px rgba(0, 255, 170, 0.5);
-            animation: softGlow 3s infinite alternate;
+            width: 86px;
+            height: 86px;
+            border-radius: 16px;
+            object-fit: cover;
+            border: 2px solid #00ffaa;
+            box-shadow: 0 0 20px #00ffaa, inset 0 0 10px #00ffaa;
+            filter: brightness(1.1) contrast(1.1);
+            transition: all 0.3s ease;
         }
 
-        @keyframes softGlow {
-            0% { opacity: 1; filter: brightness(1); border-color: #00ffaa; box-shadow: 0 0 15px #00ffaa; }
-            100% { opacity: 0.9; filter: brightness(1.1); border-color: #00ccff; box-shadow: 0 0 25px #00ccff; }
+        .penguin-frame::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 6px;
+            background: linear-gradient(90deg, transparent, #00ffaa, #00ccff, transparent);
+            border-radius: 4px;
+            filter: blur(2px);
+            animation: lightBar 2s infinite;
+        }
+
+        @keyframes lightBar {
+            0% { opacity: 0.3; width: 40px; }
+            50% { opacity: 1; width: 70px; }
+            100% { opacity: 0.3; width: 40px; }
+        }
+
+        /* أزرار تحكم جانبية (PS4 style) */
+        .penguin-frame .control-btn {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #222;
+            border: 2px solid #00ffaa;
+            box-shadow: 0 0 8px #00ffaa;
+            top: -8px;
+        }
+
+        .penguin-frame .control-btn.left {
+            left: 10px;
+        }
+        .penguin-frame .control-btn.right {
+            right: 10px;
         }
 
         h1 {
-            color: #ffffff;
-            font-size: 3.5rem;
-            font-weight: 400;
-            text-shadow: 0 2px 10px rgba(0, 255, 170, 0.5);
-            letter-spacing: 2px;
+            font-size: 3.8rem;
+            font-weight: 500;
+            background: linear-gradient(135deg, #ffffff, #aaddff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px #00aaff;
+            letter-spacing: 3px;
         }
 
         h1 span {
-            color: #00ffaa;
-            font-weight: 600;
+            background: linear-gradient(135deg, #00ffaa, #00aaff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
         }
 
-        /* شبكة الإصدارات */
+        /* شبكة الإصدارات - بطاقات زجاجية */
         .version-grid {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
             flex-wrap: wrap;
             margin: 30px 0;
-            z-index: 1;
+            z-index: 2;
         }
 
         .card {
-            background: rgba(20, 30, 45, 0.7);
-            backdrop-filter: blur(5px);
+            background: rgba(20, 30, 45, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             padding: 20px 30px;
-            border-radius: 30px;
-            border: 1px solid #2a3a55;
+            border-radius: 40px;
+            border: 1px solid #3a4a66;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.8rem;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+            font-size: 2rem;
             font-weight: 500;
             color: #ccddee;
-            min-width: 120px;
+            min-width: 130px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
         }
 
         .card:hover {
             border-color: #00ffaa;
-            box-shadow: 0 0 20px rgba(0, 255, 170, 0.3);
-            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 255, 170, 0.5), 0 10px 30px rgba(0,0,0,0.7);
+            transform: translateY(-5px) scale(1.02);
             background: rgba(30, 40, 60, 0.8);
         }
 
         .card.active {
             border-color: #00ffaa;
-            background: rgba(0, 255, 170, 0.1);
+            background: rgba(0, 255, 170, 0.15);
             color: #00ffaa;
-            box-shadow: 0 0 25px rgba(0, 255, 170, 0.3);
+            box-shadow: 0 0 40px #00ffaa;
         }
 
         .card small {
             display: block;
-            font-size: 0.8rem;
-            color: #8899aa;
-            margin-top: 5px;
+            font-size: 0.9rem;
+            color: #99aacc;
+            margin-top: 6px;
         }
 
-        /* الأزرار */
+        /* الأزرار الرئيسية */
+        .btn-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px 0;
+            z-index: 2;
+        }
+
         .btn {
-            background: linear-gradient(145deg, #1e2b3c, #15212e);
+            background: rgba(20, 30, 45, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             color: #00ffaa;
-            padding: 16px 40px;
+            padding: 18px 45px;
             border-radius: 50px;
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 500;
             cursor: pointer;
-            margin: 12px auto;
             border: 1px solid #00ffaa;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.6), 0 0 20px rgba(0,255,170,0.3);
             transition: all 0.2s ease;
-            width: fit-content;
-            display: inline-block;
-            z-index: 1;
-            position: relative;
-            backdrop-filter: blur(4px);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 2;
+        }
+
+        .btn i {
+            font-size: 2rem;
+            color: #ffaa00;
+            text-shadow: 0 0 10px #ffaa00;
         }
 
         .btn:hover {
             background: #00ffaa;
             color: #0b1120;
             border-color: #00ffaa;
-            box-shadow: 0 0 30px #00ffaa, 0 8px 20px rgba(0, 0, 0, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .btn:active {
-            transform: translateY(2px);
-            box-shadow: 0 0 20px #00ffaa;
+            box-shadow: 0 0 50px #00ffaa, 0 15px 30px rgba(0,0,0,0.8);
+            transform: translateY(-3px);
         }
 
         .btn.goldhen {
@@ -171,41 +249,120 @@
             color: #ffaa33;
         }
 
+        .btn.goldhen i {
+            color: #ffaa33;
+        }
+
         .btn.goldhen:hover {
             background: #ffaa33;
             color: #0b1120;
-            box-shadow: 0 0 30px #ffaa33;
+            box-shadow: 0 0 50px #ffaa33;
         }
 
-        /* سجل الأحداث */
-        .log {
-            background: rgba(10, 18, 28, 0.8);
-            backdrop-filter: blur(5px);
-            border: 1px solid #2a3a55;
-            border-radius: 20px;
-            margin-top: 30px;
+        /* سجل الأحداث مع تحسينات */
+        .log-panel {
+            width: 100%;
+            max-width: 750px;
+            margin: 20px 0;
+            background: rgba(10, 18, 28, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 30px;
             padding: 15px;
-            height: 150px;
+            border: 1px solid #2a3a55;
+            box-shadow: 0 0 30px rgba(0, 170, 255, 0.2);
+            z-index: 2;
+        }
+
+        .log-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 5px 15px;
+            border-bottom: 1px solid #3a4a66;
+            margin-bottom: 10px;
+            color: #aaccff;
+            font-size: 1.2rem;
+        }
+
+        .log-header i {
+            color: #00ffaa;
+            font-size: 1.4rem;
+        }
+
+        .log {
+            height: 140px;
             overflow-y: auto;
             font-family: 'Courier New', monospace;
             text-align: left;
             direction: ltr;
-            width: 100%;
-            max-width: 700px;
             font-size: 0.95rem;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
-            z-index: 1;
+            padding: 5px 10px;
         }
 
         .log div {
-            padding: 4px 8px;
+            padding: 5px 10px;
             border-right: 3px solid #00ffaa;
-            margin: 5px 0;
-            background: rgba(0, 20, 40, 0.4);
-            border-radius: 6px;
+            margin: 6px 0;
+            background: rgba(0, 20, 40, 0.5);
+            border-radius: 8px;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
         }
 
-        /* الإطار المنزلق */
+        /* لوحة الكتابات (الأنيقة) */
+        .scripture-panel {
+            background: rgba(10, 20, 35, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid #2a6f9c;
+            border-radius: 40px;
+            padding: 18px 30px;
+            margin: 20px auto;
+            width: 100%;
+            max-width: 750px;
+            box-shadow: 0 0 30px rgba(0, 170, 255, 0.3);
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .scripture-icon {
+            color: #00aaff;
+            font-size: 2rem;
+            filter: drop-shadow(0 0 8px #00aaff);
+        }
+
+        .scripture-text {
+            color: #b0e0ff;
+            font-size: 1.6rem;
+            font-weight: 400;
+            text-shadow: 0 0 10px #0077ff;
+            transition: all 0.5s ease;
+        }
+
+        /* تنسيقات الخطوط للنصوص الخاصة */
+        .arabic-script {
+            font-family: 'Traditional Arabic', 'Amiri', 'Times New Roman', serif;
+            font-size: 2rem;
+        }
+        .egyptian-script {
+            font-family: 'Arial', sans-serif;
+            font-style: italic;
+            font-size: 1.8rem;
+        }
+        .assyrian-script {
+            font-family: 'Estrangelo Edessa', 'Segoe UI Historic', 'Arial Unicode MS', sans-serif;
+            font-size: 1.8rem;
+        }
+        .username-script {
+            color: #ffaa33;
+            font-weight: 600;
+            text-shadow: 0 0 15px #ffaa33;
+        }
+
+        /* الإطار المنزلق (iframe) */
         #exploitFrame {
             position: fixed;
             bottom: -100%;
@@ -213,9 +370,10 @@
             width: 100%;
             height: 100%;
             background: #0a0f1a;
-            transition: bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
             z-index: 9999;
-            box-shadow: 0 -5px 40px rgba(0, 255, 170, 0.2);
+            box-shadow: 0 -10px 60px rgba(0, 255, 170, 0.3);
+            border-top: 2px solid #00ffaa;
         }
 
         #exploitFrame iframe {
@@ -227,102 +385,80 @@
         /* تذييل */
         .footer {
             margin-top: 40px;
-            color: #667788;
-            font-size: 0.9rem;
-            z-index: 1;
+            color: #778899;
+            font-size: 1rem;
+            z-index: 2;
+            display: flex;
+            gap: 15px;
+            align-items: center;
         }
 
-        /* النص المتحرك (شريط علوي) */
-        .hacker-slide {
+        .footer i {
+            color: #00aaff;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        /* نصوص الخلفية الهادئة (متحركة) */
+        .floating-text {
             position: fixed;
-            top: -70px;
-            left: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-            color: #00ffaa;
-            text-align: center;
-            font-size: 2rem;
-            font-weight: 400;
-            padding: 15px;
-            border-bottom: 2px solid #00ffaa;
-            box-shadow: 0 0 40px #00ffaa;
-            z-index: 10000;
-            animation: slideDownFade 8s forwards;
-            letter-spacing: 2px;
-        }
-
-        @keyframes slideDownFade {
-            0% { top: -70px; opacity: 0; }
-            10% { top: 0; opacity: 1; }
-            90% { top: 0; opacity: 1; }
-            100% { top: -70px; opacity: 0; }
-        }
-
-        /* رسالة النجاح */
-        .success-popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-            border: 2px solid #00ffaa;
-            border-radius: 40px;
-            padding: 30px 50px;
-            font-size: 3rem;
-            color: #00ffaa;
-            text-shadow: 0 0 30px #00ffaa;
-            box-shadow: 0 0 80px #00ffaa;
-            z-index: 10001;
-            animation: popFade 0.5s ease-out forwards;
-            white-space: nowrap;
-            font-weight: 400;
-            letter-spacing: 2px;
-        }
-
-        @keyframes popFade {
-            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
-            100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-        }
-
-        /* نصوص الخلفية الهادئة */
-        .hacker-text {
-            position: fixed;
-            color: #2a6f9c;
+            color: #1a4f7a;
             font-family: 'Courier New', monospace;
             font-size: 14px;
-            font-weight: 400;
-            text-shadow: 0 0 5px #00aaff;
-            z-index: 0;
+            opacity: 0.15;
             pointer-events: none;
-            opacity: 0.2;
+            z-index: 1;
             white-space: nowrap;
-            animation: floatText 20s linear infinite;
+            animation: float 25s linear infinite;
         }
 
-        @keyframes floatText {
-            0% { transform: translateY(0) translateX(0); }
-            100% { transform: translateY(-100px) translateX(20px); }
+        @keyframes float {
+            from { transform: translateY(100vh) rotate(0deg); }
+            to { transform: translateY(-100vh) rotate(360deg); }
         }
 
-        /* تنسيقات خاصة للنصوص */
-        .arabic {
-            font-family: 'Traditional Arabic', 'Amiri', serif;
+        /* شريط الإضاءة السفلي */
+        .bottom-light {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #00ffaa, #00aaff, #ff00aa, transparent);
+            filter: blur(5px);
+            animation: slideLight 5s linear infinite;
+            z-index: 1000;
         }
-        .assyrian {
-            font-family: 'Estrangelo Edessa', 'Segoe UI Historic', sans-serif;
+
+        @keyframes slideLight {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
         }
     </style>
 </head>
 <body>
-    <div class="hacker-bg" id="hackerBg"></div>
+    <!-- خلفية نجوم متحركة -->
+    <div class="stars" id="stars"></div>
+    <div class="bottom-light"></div>
 
     <div class="header">
-        <img src="https://i.postimg.cc/Z5ct06Lm/Screenshot-20260315-194604.jpg" alt="Left Penguin" class="penguin">
+        <div class="penguin-frame">
+            <div class="control-btn left"></div>
+            <div class="control-btn right"></div>
+            <img src="https://i.postimg.cc/Z5ct06Lm/Screenshot-20260315-194604.jpg" alt="Left Penguin" class="penguin">
+        </div>
         <h1><span>@ridermax077</span> 💀</h1>
-        <img src="https://i.postimg.cc/h4zBMzKT/Screenshot-20260315-194622.jpg" alt="Right Penguin" class="penguin">
+        <div class="penguin-frame">
+            <div class="control-btn left"></div>
+            <div class="control-btn right"></div>
+            <img src="https://i.postimg.cc/h4zBMzKT/Screenshot-20260315-194622.jpg" alt="Right Penguin" class="penguin">
+        </div>
     </div>
 
     <!-- اختيار الإصدار -->
@@ -333,11 +469,26 @@
     </div>
 
     <!-- الأزرار -->
-    <div class="btn" onclick="startHack()">💀 هكرني اوبن بنيه</div>
-    <div class="btn goldhen" onclick="downloadGoldhen()">📦 تحميل GoldHEN</div>
+    <div class="btn-container">
+        <div class="btn" onclick="startHack()"><i class="fas fa-skull"></i> هكرني اوبن بنيه</div>
+        <div class="btn goldhen" onclick="downloadGoldhen()"><i class="fas fa-download"></i> تحميل GoldHEN</div>
+    </div>
 
     <!-- سجل الأحداث -->
-    <div class="log" id="log"></div>
+    <div class="log-panel">
+        <div class="log-header">
+            <i class="fas fa-terminal"></i>
+            <span>سجل الأحداث</span>
+        </div>
+        <div class="log" id="log"></div>
+    </div>
+
+    <!-- لوحة الكتابات (الأنيقة) -->
+    <div class="scripture-panel">
+        <i class="fas fa-quote-right scripture-icon"></i>
+        <div class="scripture-text" id="scriptureDisplay">@ridermax077</div>
+        <i class="fas fa-quote-left scripture-icon"></i>
+    </div>
 
     <!-- الإطار المنزلق -->
     <div id="exploitFrame">
@@ -345,18 +496,61 @@
     </div>
 
     <div class="footer">
+        <i class="fas fa-playstation"></i>
         <p>© 2026 @ridermax077 | جميع الحقوق محفوظة</p>
+        <i class="fas fa-shield-alt"></i>
     </div>
 
     <script>
+        // إنشاء نجوم الخلفية
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 5 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+        createStars();
+
         // عناصر الصفحة
         const logDiv = document.getElementById('log');
         const exploitFrame = document.getElementById('exploitFrame');
         const exploitIframe = document.getElementById('frame');
         const cards = document.querySelectorAll('.card');
+        const scriptureDisplay = document.getElementById('scriptureDisplay');
         let selectedVersion = '9.00';
+        let scriptureIndex = 0;
 
-        // أحداث اختيار الإصدار
+        // قائمة الكتابات
+        const scriptures = [
+            { text: '@ridermax077', class: 'username-script' },
+            { text: 'بيتك كضومي', class: 'arabic-script' },
+            { text: 'كضومي هاك', class: 'arabic-script' },
+            { text: 'بغداد تايم', class: 'arabic-script' },
+            { text: 'عراق هكر', class: 'arabic-script' },
+            { text: 'ܐܬܐ ܕܚܫܘܟܐ', class: 'assyrian-script' },
+            { text: 'ܫܠܡܐ ܥܠ ܣܝܣܛܡ', class: 'assyrian-script' },
+            { text: 'ܦܠܛ ܡܢ ܚܘܕܪܐ', class: 'assyrian-script' },
+            { text: 'فكيت الشيفرة يا باشا', class: 'egyptian-script' },
+            { text: 'دخلت سيستماك', class: 'egyptian-script' },
+            { text: 'هكرتك يا عم', class: 'egyptian-script' },
+            { text: 'تم اختراق النظام', class: 'arabic-script' },
+            { text: 'ثغرة أمنية', class: 'arabic-script' }
+        ];
+
+        function rotateScripture() {
+            scriptureIndex = (scriptureIndex + 1) % scriptures.length;
+            const item = scriptures[scriptureIndex];
+            scriptureDisplay.textContent = item.text;
+            scriptureDisplay.className = 'scripture-text ' + item.class;
+        }
+        setInterval(rotateScripture, 4000);
+
+        // أحداث الإصدارات
         cards.forEach(card => {
             card.addEventListener('click', () => {
                 cards.forEach(c => c.classList.remove('active'));
@@ -366,7 +560,6 @@
             });
         });
 
-        // دالة إضافة سجل
         function addLog(message) {
             const entry = document.createElement('div');
             entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
@@ -374,50 +567,94 @@
             logDiv.scrollTop = logDiv.scrollHeight;
         }
 
-        // شريط متحرك
+        // شريط متحرك (انزل من الشاشه)
         function showHackerSlide() {
             const slide = document.createElement('div');
-            slide.className = 'hacker-slide';
+            slide.style.position = 'fixed';
+            slide.style.top = '-80px';
+            slide.style.left = '0';
+            slide.style.width = '100%';
+            slide.style.background = 'rgba(0,0,0,0.9)';
+            slide.style.backdropFilter = 'blur(10px)';
+            slide.style.color = '#00ffaa';
+            slide.style.textAlign = 'center';
+            slide.style.fontSize = '2.5rem';
+            slide.style.padding = '20px';
+            slide.style.borderBottom = '2px solid #00ffaa';
+            slide.style.boxShadow = '0 0 50px #00ffaa';
+            slide.style.zIndex = '10000';
+            slide.style.animation = 'slideDownFade 8s forwards';
             slide.textContent = '🔻 انزل من الشاشه كا انهو هكر 🔻';
             document.body.appendChild(slide);
+
+            // إضافة keyframes ديناميكياً
+            const style = document.createElement('style');
+            style.innerHTML = `
+                @keyframes slideDownFade {
+                    0% { top: -80px; opacity: 0; }
+                    10% { top: 0; opacity: 1; }
+                    90% { top: 0; opacity: 1; }
+                    100% { top: -80px; opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
             setTimeout(() => slide.remove(), 8000);
         }
 
-        // رسالة النجاح
         function showSuccessMessage() {
             const popup = document.createElement('div');
-            popup.className = 'success-popup';
+            popup.style.position = 'fixed';
+            popup.style.top = '50%';
+            popup.style.left = '50%';
+            popup.style.transform = 'translate(-50%, -50%)';
+            popup.style.background = 'rgba(0,0,0,0.95)';
+            popup.style.backdropFilter = 'blur(20px)';
+            popup.style.border = '3px solid #00ffaa';
+            popup.style.borderRadius = '60px';
+            popup.style.padding = '40px 70px';
+            popup.style.fontSize = '4rem';
+            popup.style.color = '#00ffaa';
+            popup.style.textShadow = '0 0 40px #00ffaa';
+            popup.style.boxShadow = '0 0 100px #00ffaa';
+            popup.style.zIndex = '10001';
+            popup.style.animation = 'popIn 0.5s';
             popup.textContent = '🔥 هكر مني لكه !! 🔥';
             document.body.appendChild(popup);
+
+            const style = document.createElement('style');
+            style.innerHTML = `
+                @keyframes popIn {
+                    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+                    80% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+                    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
             setTimeout(() => popup.remove(), 3000);
         }
 
-        // نصوص هكر خلفية (خفيفة)
-        function createHackerTexts() {
-            const texts = [
-                '@ridermax077', 'بيتك كضومي', 'كضومي هاك', 'بغداد تايم', 'عراق هكر',
-                'ܐܬܐ ܕܚܫܘܟܐ', 'ܫܠܡܐ ܥܠ ܣܝܣܛܡ', 'فكيت الشيفرة', 'دخلت سيستماك',
-                'ROOT', 'EXPLOIT', 'SHELL', '0DAY', 'ACCESS GRANTED'
-            ];
-            for (let i = 0; i < 10; i++) {
+        // نصوص خلفية عائمة
+        function createFloatingTexts() {
+            const texts = ['@ridermax077', 'PS4', 'HACK', '9.00', 'GOLDHEN', 'بيتك كضومي', 'ܐܬܐ ܕܚܫܘܟܐ', 'EXPLOIT'];
+            for (let i = 0; i < 15; i++) {
                 const span = document.createElement('div');
-                span.className = 'hacker-text';
+                span.className = 'floating-text';
                 span.textContent = texts[Math.floor(Math.random() * texts.length)];
                 span.style.left = Math.random() * 100 + '%';
-                span.style.top = Math.random() * 100 + '%';
+                span.style.fontSize = (12 + Math.random() * 20) + 'px';
                 span.style.animationDuration = (15 + Math.random() * 20) + 's';
-                span.style.animationDelay = Math.random() * 5 + 's';
-                span.style.opacity = 0.1 + Math.random() * 0.1;
+                span.style.animationDelay = Math.random() * 10 + 's';
                 document.body.appendChild(span);
-                setTimeout(() => span.remove(), 20000);
+                setTimeout(() => span.remove(), 30000);
             }
         }
+        setInterval(createFloatingTexts, 8000);
 
         // بدء الهكر
         function startHack() {
             addLog('🚀 فتح الهوست الحقيقي...');
             showHackerSlide();
-            createHackerTexts();
+            createFloatingTexts();
 
             let exploitUrl = '';
             if (selectedVersion === '9.00') exploitUrl = 'https://bex19.github.io/313/?i=1';
@@ -450,25 +687,20 @@
             addLog('🎉 هاي تهكيره مني لكه');
             addLog('🔥 GoldHEN مفعل بنجاح');
             showSuccessMessage();
-            createHackerTexts();
+            createFloatingTexts();
         }
 
-        // تحميل GoldHEN (أحدث إصدار)
         function downloadGoldhen() {
             addLog('📦 جاري التوجيه إلى أحدث إصدار GoldHEN...');
             window.open('https://github.com/GoldHEN/GoldHEN/releases/latest', '_blank');
         }
 
-        // تشغيل تلقائي
         if (window.location.search.includes('i=1')) {
             setTimeout(() => {
                 addLog('⚡ وضع تلقائي (i=1)');
                 startHack();
             }, 1500);
         }
-
-        // إضافة بعض النصوص الهادئة بشكل دوري
-        setInterval(createHackerTexts, 10000);
     </script>
 </body>
 </html>
