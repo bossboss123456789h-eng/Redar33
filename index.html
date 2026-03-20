@@ -382,49 +382,6 @@
             border: none;
         }
 
-        /* تذييل أنيق مع إضافة العبارات المطلوبة */
-        .footer {
-            margin-top: 40px;
-            width: 100%;
-            max-width: 750px;
-            z-index: 2;
-        }
-
-        .footer-content {
-            background: rgba(10, 18, 28, 0.7);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border-radius: 40px;
-            padding: 15px 25px;
-            border: 1px solid #2a3a55;
-            box-shadow: 0 0 20px rgba(0, 170, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        .footer-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #aaccff;
-            font-size: 1.3rem;
-        }
-
-        .footer-item i {
-            color: #00aaff;
-            font-size: 1.6rem;
-            filter: drop-shadow(0 0 5px #00aaff);
-        }
-
-        .footer-item .special-text {
-            color: #ffaa33;
-            font-weight: 600;
-            text-shadow: 0 0 10px #ffaa33;
-        }
-
         /* نصوص الخلفية الهادئة (متحركة) */
         .floating-text {
             position: fixed;
@@ -607,7 +564,6 @@
     <!-- اختيار الإصدار (فقط 9.00) -->
     <div class="version-grid">
         <div class="card active" data-v="9.00">9.00 <small>مستقر</small></div>
-        <!-- تم إزالة 11.00 و 5.05 -->
     </div>
 
     <!-- الأزرار -->
@@ -632,18 +588,16 @@
         <i class="fas fa-quote-left scripture-icon"></i>
     </div>
 
-    <!-- رسالة ثابتة في الأسفل (الكتابة الضاهر) -->
+    <!-- رسالة ثابتة في الأسفل (الكتابة الضاهر) بدون العبارة المطلوب حذفها -->
     <div class="persistent-message" id="persistentMsg">
         <i class="fas fa-shield-alt"></i>
-        <span>وو بيتك كضومي | @ridermax707 | PRO HOST</span>
+        <span>@ridermax707 | PRO HOST</span>
     </div>
 
     <!-- الإطار المنزلق -->
     <div id="exploitFrame">
         <iframe id="frame" src="about:blank"></iframe>
     </div>
-
-    <!-- تذييل ثابت (اختياري) - لكن لدينا بالفعل persistent-message -->
 
     <script>
         // إنشاء نجوم الخلفية
@@ -666,14 +620,12 @@
         const exploitIframe = document.getElementById('frame');
         const cards = document.querySelectorAll('.card');
         const scriptureDisplay = document.getElementById('scriptureDisplay');
-        let selectedVersion = '9.00'; // ثابت
+        let selectedVersion = '9.00';
         let scriptureIndex = 0;
 
-        // قائمة الكتابات
+        // قائمة الكتابات (تم حذف "بيتك كضومي" و "كضومي هاك")
         const scriptures = [
             { text: '@ridermax707', class: 'username-script' },
-            { text: 'بيتك كضومي', class: 'arabic-script' },
-            { text: 'كضومي هاك', class: 'arabic-script' },
             { text: 'بغداد تايم', class: 'arabic-script' },
             { text: 'عراق هكر', class: 'arabic-script' },
             { text: 'ܐܬܐ ܕܚܫܘܟܐ', class: 'assyrian-script' },
@@ -694,7 +646,6 @@
         }
         setInterval(rotateScripture, 4000);
 
-        // أحداث الإصدارات (لا حاجة لأن الخيار واحد، لكن نحافظ على التفاعل)
         cards.forEach(card => {
             card.addEventListener('click', () => {
                 cards.forEach(c => c.classList.remove('active'));
@@ -746,7 +697,6 @@
 
         // دالة إظهار رسالة النجاح بشكل جميل
         function showSuccessMessage() {
-            // إزالة أي رسالة نجاح سابقة
             const oldMsg = document.querySelector('.success-message');
             if (oldMsg) oldMsg.remove();
 
@@ -760,22 +710,20 @@
             `;
             document.body.appendChild(msgDiv);
 
-            // إضافة تأثير إضافي: تغيير لون الخلفية للحظات
             document.body.style.transition = 'background 0.5s';
             document.body.style.background = 'radial-gradient(circle at 20% 30%, #00aa33, #0b121c)';
             setTimeout(() => {
                 document.body.style.background = 'radial-gradient(circle at 20% 30%, #1a2a3a, #0b121c)';
             }, 500);
 
-            // إزالة الرسالة بعد 7 ثواني (اختياري)
             setTimeout(() => {
                 if (msgDiv.parentNode) msgDiv.remove();
             }, 7000);
         }
 
-        // نصوص خلفية عائمة
+        // نصوص خلفية عائمة (تم حذف "بيتك كضومي" و "كضومي هاك")
         function createFloatingTexts() {
-            const texts = ['@ridermax707', 'PS4', 'HACK', '9.00', 'GOLDHEN', 'بيتك كضومي', 'ܐܬܐ ܕܚܫܘܟܐ', 'EXPLOIT'];
+            const texts = ['@ridermax707', 'PS4', 'HACK', '9.00', 'GOLDHEN', 'ܐܬܐ ܕܚܫܘܟܐ', 'EXPLOIT'];
             for (let i = 0; i < 15; i++) {
                 const span = document.createElement('div');
                 span.className = 'floating-text';
@@ -790,12 +738,12 @@
         }
         setInterval(createFloatingTexts, 8000);
 
-        // دالة إظهار كلمات إضافية بطريقة الهكر عند الضغط على زر الهكر
+        // دالة إظهار كلمات إضافية بطريقة الهكر (تم حذف كل ما يتعلق بـ "كضومي")
         function showExtraHackerWords() {
             const extraWords = [
                 'ACCESS GRANTED', 'ROOT', 'EXPLOIT', '0DAY', 'SHELL', 'BACKDOOR',
-                'PAYLOAD', 'INJECT', 'CRACK', 'HACKED', 'BY @ridermax707', 'وو بيتك كضومي',
-                'كضومي هاك', 'ܐܬܐ ܕܚܫܘܟܐ', 'فكيت الشيفرة', 'دخلت سيستماك'
+                'PAYLOAD', 'INJECT', 'CRACK', 'HACKED', 'BY @ridermax707',
+                'ܐܬܐ ܕܚܫܘܟܐ', 'فكيت الشيفرة', 'دخلت سيستماك'
             ];
             for (let i = 0; i < 20; i++) {
                 const span = document.createElement('div');
@@ -806,7 +754,7 @@
                 span.style.fontSize = (14 + Math.random() * 30) + 'px';
                 span.style.animationDuration = (2 + Math.random() * 4) + 's';
                 span.style.animationDelay = Math.random() * 2 + 's';
-                span.style.color = `hsl(${Math.random() * 60 + 150}, 100%, 60%)`; // ألوان بين الأخضر والأزرق
+                span.style.color = `hsl(${Math.random() * 60 + 150}, 100%, 60%)`;
                 document.body.appendChild(span);
                 setTimeout(() => span.remove(), 5000);
             }
@@ -817,11 +765,10 @@
             addLog('🚀 فتح الهوست الحقيقي...');
             showHackerSlide();
             createFloatingTexts();
-            showExtraHackerWords(); // إظهار الكلمات الإضافية
+            showExtraHackerWords();
 
             let exploitUrl = '';
             if (selectedVersion === '9.00') exploitUrl = 'https://bex19.github.io/313/?i=1';
-            // يمكن إضافة خيارات أخرى لكن بما أنه فقط 9.00 نستخدم هذا الرابط
 
             exploitIframe.src = exploitUrl;
             exploitFrame.style.bottom = '0';
@@ -848,9 +795,9 @@
             exploitIframe.src = 'about:blank';
             addLog('🎉 هاي تهكيره مني لكه');
             addLog('🔥 GoldHEN مفعل بنجاح');
-            showSuccessMessage(); // رسالة النجاح الجميلة
+            showSuccessMessage();
             createFloatingTexts();
-            showExtraHackerWords(); // أيضاً بعد الإغلاق
+            showExtraHackerWords();
         }
 
         function downloadGoldhen() {
