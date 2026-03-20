@@ -382,26 +382,47 @@
             border: none;
         }
 
-        /* تذييل */
+        /* تذييل أنيق مع إضافة العبارات المطلوبة */
         .footer {
             margin-top: 40px;
-            color: #778899;
-            font-size: 1rem;
+            width: 100%;
+            max-width: 750px;
             z-index: 2;
+        }
+
+        .footer-content {
+            background: rgba(10, 18, 28, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 40px;
+            padding: 15px 25px;
+            border: 1px solid #2a3a55;
+            box-shadow: 0 0 20px rgba(0, 170, 255, 0.2);
             display: flex;
-            gap: 15px;
             align-items: center;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
         }
 
-        .footer i {
+        .footer-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #aaccff;
+            font-size: 1.3rem;
+        }
+
+        .footer-item i {
             color: #00aaff;
-            animation: pulse 2s infinite;
+            font-size: 1.6rem;
+            filter: drop-shadow(0 0 5px #00aaff);
         }
 
-        @keyframes pulse {
-            0% { opacity: 0.6; }
-            50% { opacity: 1; }
-            100% { opacity: 0.6; }
+        .footer-item .special-text {
+            color: #ffaa33;
+            font-weight: 600;
+            text-shadow: 0 0 10px #ffaa33;
         }
 
         /* نصوص الخلفية الهادئة (متحركة) */
@@ -439,6 +460,27 @@
             0% { opacity: 0.3; }
             50% { opacity: 1; }
             100% { opacity: 0.3; }
+        }
+
+        /* نصوص إضافية تظهر عند الضغط على زر الهكر */
+        .hacker-extra {
+            position: fixed;
+            color: #00ffaa;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            text-shadow: 0 0 15px #00ffaa, 0 0 30px #00aaff;
+            z-index: 10002;
+            pointer-events: none;
+            animation: extraFade 3s forwards;
+            white-space: nowrap;
+            direction: ltr;
+        }
+
+        @keyframes extraFade {
+            0% { opacity: 0; transform: scale(0.5); }
+            20% { opacity: 1; transform: scale(1.2); }
+            80% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.5); }
         }
     </style>
 </head>
@@ -495,10 +537,22 @@
         <iframe id="frame" src="about:blank"></iframe>
     </div>
 
+    <!-- تذييل يحوي العبارات المطلوبة -->
     <div class="footer">
-        <i class="fas fa-playstation"></i>
-        <p>© 2026 @ridermax077 | جميع الحقوق محفوظة</p>
-        <i class="fas fa-shield-alt"></i>
+        <div class="footer-content">
+            <div class="footer-item">
+                <i class="fas fa-dragon"></i>
+                <span class="special-text">وو بيتك كضومي</span>
+            </div>
+            <div class="footer-item">
+                <i class="fas fa-user-secret"></i>
+                <span>@ridermax077</span>
+            </div>
+            <div class="footer-item">
+                <i class="fas fa-shield-halded"></i>
+                <span>PRO HOST</span>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -587,7 +641,6 @@
             slide.textContent = '🔻 انزل من الشاشه كا انهو هكر 🔻';
             document.body.appendChild(slide);
 
-            // إضافة keyframes ديناميكياً
             const style = document.createElement('style');
             style.innerHTML = `
                 @keyframes slideDownFade {
@@ -650,11 +703,34 @@
         }
         setInterval(createFloatingTexts, 8000);
 
+        // دالة إظهار كلمات إضافية بطريقة الهكر عند الضغط على زر الهكر
+        function showExtraHackerWords() {
+            const extraWords = [
+                'ACCESS GRANTED', 'ROOT', 'EXPLOIT', '0DAY', 'SHELL', 'BACKDOOR',
+                'PAYLOAD', 'INJECT', 'CRACK', 'HACKED', 'BY @ridermax077', 'وو بيتك كضومي',
+                'كضومي هاك', 'ܐܬܐ ܕܚܫܘܟܐ', 'فكيت الشيفرة', 'دخلت سيستماك'
+            ];
+            for (let i = 0; i < 20; i++) {
+                const span = document.createElement('div');
+                span.className = 'hacker-extra';
+                span.textContent = extraWords[Math.floor(Math.random() * extraWords.length)];
+                span.style.left = Math.random() * 100 + '%';
+                span.style.top = Math.random() * 100 + '%';
+                span.style.fontSize = (14 + Math.random() * 30) + 'px';
+                span.style.animationDuration = (2 + Math.random() * 4) + 's';
+                span.style.animationDelay = Math.random() * 2 + 's';
+                span.style.color = `hsl(${Math.random() * 60 + 150}, 100%, 60%)`; // ألوان بين الأخضر والأزرق
+                document.body.appendChild(span);
+                setTimeout(() => span.remove(), 5000);
+            }
+        }
+
         // بدء الهكر
         function startHack() {
             addLog('🚀 فتح الهوست الحقيقي...');
             showHackerSlide();
             createFloatingTexts();
+            showExtraHackerWords(); // إظهار الكلمات الإضافية
 
             let exploitUrl = '';
             if (selectedVersion === '9.00') exploitUrl = 'https://bex19.github.io/313/?i=1';
@@ -688,6 +764,7 @@
             addLog('🔥 GoldHEN مفعل بنجاح');
             showSuccessMessage();
             createFloatingTexts();
+            showExtraHackerWords(); // أيضاً بعد الإغلاق
         }
 
         function downloadGoldhen() {
